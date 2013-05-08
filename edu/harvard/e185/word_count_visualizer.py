@@ -16,16 +16,21 @@ class WordCountVisualizer(object):
     def transform_data(self):
         col_family = self._column_family()
         columns = list(col_family.xget('row_key'))
-        self._write_data(columns, self._output_file())
+        self._write_data(columns)
 
-    def _write_data(self, columns, f):
+    def _write_data(self, columns):
+        f = self._output_file()
+        f._write(self.COL1, self.COL2, f)
         for column in columns:
-            f.write('%s,%s\n' % (column[0], column[1]))
+            self._write(column[0], column[1], f)
         f.close()
 
     def load_data(self):
         col_family = self._column_family()
         self._read_data(col_family)
+
+    def _write(self, val1, val2, f):
+        f.write('%s,%s\n' % (val1, val2))
 
     def _read_data(self, col_family):
         f = self._input_file()
