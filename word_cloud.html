@@ -11,11 +11,11 @@
 
   var fill = d3.scale.category20();
 
-  d3.layout.cloud().size([600, 600])
+  d3.layout.cloud().size([960, 600])
       .words(wordcountdata.map(function(d) {
-        return {text: d.word, size: d.count/250};
+        return {text: d.word, size: d.count/200};
       }))
-      .rotate(function() { return ~~(Math.random() * 2) * 90; })
+      .rotate(function() { return ~~(Math.random() * 5) * 30 - 60; })
       .font("Impact")
       .fontSize(function(d) { return d.size; })
       .on("end", draw)
@@ -23,8 +23,8 @@
 
   function draw(words) {
     d3.select("body").append("svg")
-        .attr("width", 300)
-        .attr("height", 300)
+        .attr("width", 2000)
+        .attr("height", 2000)
       .append("g")
         .attr("transform", "translate(150,150)")
       .selectAll("text")

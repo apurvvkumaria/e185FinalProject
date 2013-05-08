@@ -6,7 +6,7 @@ from pycassa.system_manager import *
 class WordCountVisualizer(object):
     INPUT_FILE, OUTPUT_FILE = ('wordcount', 'wordcount.jsonp')
     KEY_SPACE, COL_FAMILY, COL1, COL2 = ('Harvard', 'WordCount', 'word', 'count')
-    EXCLUDED_WORDS = ['the', 'nbsp', 'to', 'est', 'in', 'and', 'of', 'nd']
+    EXCLUDED_WORDS = ['the', 'nbsp', 'to', 'est', 'in', 'and', 'of', 'nd', 'a', 'by', 'for', 'or', 'with', 'km', 'm']
 
     def bootstrap(self):
         sys = SystemManager()
