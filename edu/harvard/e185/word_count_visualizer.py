@@ -62,7 +62,6 @@ class WordCountVisualizer(object):
 
 def main():
     reader = WordCountVisualizer()
-    reader.bootstrap()
     reader.load_data()
     reader.transform_data()
 
