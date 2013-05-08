@@ -1,0 +1,2 @@
+class WordCountReader(object):
+    pass
