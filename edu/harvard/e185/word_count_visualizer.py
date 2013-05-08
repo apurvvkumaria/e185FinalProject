@@ -35,9 +35,6 @@ class WordCountVisualizer(object):
     def _excluded_word(self, word):
         return word in self.EXCLUDED_WORDS
 
-    def _write(self, val1, val2, f):
-        f.write('{"word":%s", "count":"%s"},\n' % (val1, val2))
-
     def _read_data(self, col_family):
         f = self._input_file()
         for line in f:
