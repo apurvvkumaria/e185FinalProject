@@ -4,8 +4,9 @@ from pycassa.system_manager import *
 
 
 class WordCountVisualizer(object):
-    INPUT_FILE, OUTPUT_FILE = ('wordcount', 'wordcount.csv')
+    INPUT_FILE, OUTPUT_FILE = ('wordcount', 'wordcount.jsonp')
     KEY_SPACE, COL_FAMILY, COL1, COL2 = ('Harvard', 'WordCount', 'word', 'count')
+    EXCLUDED_WORDS = ['the', 'nbsp', 'to', 'est', 'in', 'and', 'of', 'nd']
 
     def bootstrap(self):
         sys = SystemManager()
@@ -20,17 +21,22 @@ class WordCountVisualizer(object):
 
     def _write_data(self, columns):
         f = self._output_file()
-        f._write(self.COL1, self.COL2, f)
+        f.write('wordcountdata=[')
         for column in columns:
-            self._write(column[0], column[1], f)
+            if not self._excluded_word(column[0]):
+                f.write('{"word":"%s", "count":%s},' % (column[0], column[1]))
+        f.write(']')
         f.close()
 
     def load_data(self):
         col_family = self._column_family()
         self._read_data(col_family)
 
+    def _excluded_word(self, word):
+        return word in self.EXCLUDED_WORDS
+
     def _write(self, val1, val2, f):
-        f.write('%s,%s\n' % (val1, val2))
+        f.write('{"word":%s", "count":"%s"},\n' % (val1, val2))
 
     def _read_data(self, col_family):
         f = self._input_file()
