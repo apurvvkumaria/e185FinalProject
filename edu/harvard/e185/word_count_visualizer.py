@@ -4,7 +4,7 @@ from pycassa.system_manager import *
 
 
 class WordCountVisualizer(object):
-    COUNTER, INPUT_FILE_NAME = (0, 'wordcount')
+    INPUT_FILE_NAME = 'wordcount'
     KEY_SPACE, COL_FAMILY, COL1, COL2 = ('Harvard', 'WordCount', 'word', 'count')
 
     def bootstrap(self):
@@ -15,9 +15,9 @@ class WordCountVisualizer(object):
 
     def read_data(self):
         col_family = self._column_family()
-        num_rows = len(list(col_family.get_range()))
-        for count in range(0, num_rows):
-            print col_family.get('row' + str(count), columns=[self.COL1, self.COL2])
+        columns = list(col_family.xget('row_key'))
+        for column in columns:
+            print '%s,%s' % (column[0], column[1])
 
     def load_data(self):
         f = self._read_file()
@@ -39,8 +39,7 @@ class WordCountVisualizer(object):
         return pycassa.ColumnFamily(pool, self.COL_FAMILY)
 
     def _insert_data(self, col_family, text, count):
-        col_family.insert('row' + str(self.COUNTER), {self.COL1: text, self.COL2: count})
-        self.COUNTER += 1
+        col_family.insert('row_key', {text: count})
 
 
 def main():
