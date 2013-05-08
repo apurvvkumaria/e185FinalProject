@@ -3,7 +3,7 @@ from pycassa.pool import ConnectionPool
 from pycassa.system_manager import *
 
 
-class WordCountReader(object):
+class WordCountVisualizer(object):
     COUNTER, INPUT_FILE_NAME = (0, 'wordcount')
     KEY_SPACE, COL_FAMILY, COL1, COL2 = ('Harvard', 'WordCount', 'word', 'count')
 
@@ -44,7 +44,7 @@ class WordCountReader(object):
 
 
 def main():
-    reader = WordCountReader()
+    reader = WordCountVisualizer()
     reader.bootstrap()
     reader.load_data()
     reader.read_data()
