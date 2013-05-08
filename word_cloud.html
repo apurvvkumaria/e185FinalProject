@@ -4,16 +4,16 @@
 <script src="d3.layout.cloud.js"></script>
 <body>
 
-<script src="file:///Users/Thoughtworker/PycharmProjects/FinalProject-Cassandra/edu/harvard/e185/wordcount.jsonp"></script>
+<script src="file:///Users/Thoughtworker/PycharmProjects/FinalProject-Cassandra/wordcount.jsonp"></script>
 <script type="text/javascript">
 
 
 
   var fill = d3.scale.category20();
 
-  d3.layout.cloud().size([960, 600])
+  d3.layout.cloud().size([1500, 1500])
       .words(wordcountdata.map(function(d) {
-        return {text: d.word, size: d.count/200};
+        return {text: d.word, size: d.count/150};
       }))
       .rotate(function() { return ~~(Math.random() * 5) * 30 - 60; })
       .font("Impact")

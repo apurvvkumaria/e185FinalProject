@@ -1,5 +1,5 @@
 import subprocess
-from edu.harvard.e185.word_count_visualizer import WordCountVisualizer
+from word_count_visualizer import WordCountVisualizer
 
 
 def main():
